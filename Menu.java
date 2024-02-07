@@ -46,9 +46,11 @@ class Menu {
         System.out.println("|      6. Returner à l'acceuil.      |");
         System.out.println("+------------------------------------+");
         System.out.print("          Entrez : ");
+        Library POOLibrary = new Library();
         int ChoixLivre = new Scanner(System.in).nextInt();
         switch(ChoixLivre){
             case 1:
+                POOLibrary.AddBook();
                 break;
             case 2:
                 break;
