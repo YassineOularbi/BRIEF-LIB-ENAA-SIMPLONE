@@ -20,4 +20,15 @@ class Library {
         System.out.println("| Le livre a été ajouté avec succes! |");
         System.out.println("+------------------------------------+");
     }
+    void DisplayBooks(){
+        for (int i = 0; i<ArrayBook.size(); i++){
+            System.out.println("-> Titre :" + ArrayBook.get(i).Title);
+            System.out.println("-> Auteur :" + ArrayBook.get(i).Author);
+            System.out.println("-> Date de publication :" + ArrayBook.get(i).Publication_Date);
+            System.out.println("-> Numéro ISBN :" + ArrayBook.get(i).ISBN_Number);
+            System.out.println("+------------------------------------+");
+        }
+    }
 }
+
+

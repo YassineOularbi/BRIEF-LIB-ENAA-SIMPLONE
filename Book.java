@@ -3,5 +3,4 @@ class Book {
         String Author;
         String Publication_Date;
         String ISBN_Number;
-
 }
