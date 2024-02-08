@@ -1,8 +1,11 @@
+import java.sql.Struct;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 class Menu {
     Library POOLibrary = new Library();
+    Scanner scanner = new Scanner(System.in);
     void InterfaceMenu () {
-        int ChoixPrincipal;
+        int ChoixPrincipal = 4;
         do
         {
             System.out.println("+------------------------------------+");
@@ -14,7 +17,15 @@ class Menu {
             System.out.println("|      4. Quitter                    |");
             System.out.println("+------------------------------------+");
             System.out.print("          Entrez : ");
-            ChoixPrincipal = new Scanner(System.in).nextInt();
+            try {
+                String input = scanner.nextLine();
+                ChoixPrincipal = Integer.parseInt(input);
+            } catch (NumberFormatException e){
+                System.out.println("+------------------------------------+");
+                System.out.println("|             Désolé !!!             |");
+                System.out.println("|   Entrez un nombre entre 1 et 4 !  |");
+                InterfaceMenu();
+            }
             switch (ChoixPrincipal) {
                 case 1:
                     InterfaceLivres();
@@ -30,15 +41,14 @@ class Menu {
                     System.out.println("+------------------------------------+");
                     break;
                 default:
-                    System.out.println("|      Entrez un choix valid !         |");
-                    InterfaceMenu();
+                    System.out.println("|      Entrez un choix valid !       |");
                     break;
             }
         }while(ChoixPrincipal != 4);
     }
 
     void InterfaceLivres(){
-        int ChoixLivre;
+        int ChoixLivre = 6;
         do
         {
         System.out.println("+------------------------------------+");
@@ -53,7 +63,15 @@ class Menu {
         System.out.println("|      6. Returner à l'acceuil.      |");
         System.out.println("+------------------------------------+");
         System.out.print("          Entrez : ");
-        ChoixLivre = new Scanner(System.in).nextInt();
+        try{
+            String input = scanner.nextLine();
+            ChoixLivre = Integer.parseInt(input);
+        }catch (NumberFormatException e){
+            System.out.println("+------------------------------------+");
+            System.out.println("|             Désolé !!!             |");
+            System.out.println("|   Entrez un nombre entre 1 et 6 !  |");
+            InterfaceLivres();
+        }
         switch(ChoixLivre){
             case 1:
                 POOLibrary.AddBook();
@@ -71,14 +89,13 @@ class Menu {
                 InterfaceMenu();
                 break;
             default:
-                System.out.println("|      Entrez un choix valid !         |");
-                InterfaceLivres();
+                System.out.println("|      Entrez un choix valid !       |");
                 break;
         }
         }while (ChoixLivre != 6);
     }
     void InterfaceEtudiant(){
-        int ChoixEtudiant;
+        int ChoixEtudiant = 6;
         do {
             System.out.println("+------------------------------------+");
             System.out.println("|        Interface Etudiant(e)s      |");
@@ -91,7 +108,15 @@ class Menu {
             System.out.println("|      6. Returner à l'acceuil.      |");
             System.out.println("+------------------------------------+");
             System.out.print("          Entrez : ");
-            ChoixEtudiant = new Scanner(System.in).nextInt();
+            try{
+                String inputTry = scanner.nextLine();
+                ChoixEtudiant = Integer.parseInt(inputTry);
+            }catch (NumberFormatException e){
+            System.out.println("+------------------------------------+");
+            System.out.println("|             Désolé !!!             |");
+            System.out.println("|   Entrez un nombre entre 1 et 6 !  |");
+            InterfaceEtudiant();
+            }
             switch (ChoixEtudiant) {
                 case 1:
                     break;
@@ -107,8 +132,7 @@ class Menu {
                     InterfaceMenu();
                     break;
                 default:
-                    System.out.println("|      Entrez un choix valid !         |");
-                    InterfaceEtudiant();
+                    System.out.println("|      Entrez un choix valid !       |");
                     break;
             }
         }while (ChoixEtudiant != 6);
