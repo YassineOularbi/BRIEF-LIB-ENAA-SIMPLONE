@@ -59,8 +59,8 @@ class Menu {
         System.out.println("|      3. Supprimer un livre.        |");
         System.out.println("|      4. Rechercher un livre.       |");
         System.out.println("|      5. Afficher les livres.       |");
-        System.out.println("|      5. Afficher les Reservations. |");
-        System.out.println("|      6. Returner à l'acceuil.      |");
+        System.out.println("|      6. Afficher les Reservations. |");
+        System.out.println("|      7. Returner à l'acceuil.      |");
         System.out.println("+------------------------------------+");
         System.out.print("          Entrez : ");
         try{
@@ -79,6 +79,7 @@ class Menu {
             case 2:
                 break;
             case 3:
+                POOLibrary.RemoveBook();
                 break;
             case 4:
                 break;
@@ -86,13 +87,15 @@ class Menu {
                 POOLibrary.DisplayBooks();
                 break;
             case 6:
+                break;
+            case 7 :
                 InterfaceMenu();
                 break;
             default:
                 System.out.println("|      Entrez un choix valid !       |");
                 break;
         }
-        }while (ChoixLivre != 6);
+        }while (ChoixLivre != 7);
     }
     void InterfaceEtudiant(){
         int ChoixEtudiant = 6;
@@ -129,12 +132,14 @@ class Menu {
                 case 5:
                     break;
                 case 6:
+                    break;
+                case 7 :
                     InterfaceMenu();
                     break;
                 default:
                     System.out.println("|      Entrez un choix valid !       |");
                     break;
             }
-        }while (ChoixEtudiant != 6);
+        }while (ChoixEtudiant != 7);
     }
 }
