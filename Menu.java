@@ -1,8 +1,7 @@
-import java.sql.Struct;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 class Menu {
     Library POOLibrary = new Library();
+    Book POOBook = new Book();
     Scanner scanner = new Scanner(System.in);
     void InterfaceMenu () {
         int ChoixPrincipal = 4;
@@ -48,7 +47,7 @@ class Menu {
     }
 
     void InterfaceLivres(){
-        int ChoixLivre = 6;
+        int ChoixLivre = 7;
         do
         {
         System.out.println("+------------------------------------+");
@@ -77,11 +76,13 @@ class Menu {
                 POOLibrary.AddBook();
                 break;
             case 2:
+                POOLibrary.ModifyBookLib();
                 break;
             case 3:
                 POOLibrary.RemoveBook();
                 break;
             case 4:
+                POOLibrary.SearchBook();
                 break;
             case 5:
                 POOLibrary.DisplayBooks();
@@ -98,7 +99,7 @@ class Menu {
         }while (ChoixLivre != 7);
     }
     void InterfaceEtudiant(){
-        int ChoixEtudiant = 6;
+        int ChoixEtudiant = 7;
         do {
             System.out.println("+------------------------------------+");
             System.out.println("|        Interface Etudiant(e)s      |");
@@ -107,8 +108,9 @@ class Menu {
             System.out.println("|      2. Modifier un étudiant(e).   |");
             System.out.println("|      3. Supprimer un étudiant(e).  |");
             System.out.println("|      4. Rechercher un étudiant(e). |");
-            System.out.println("|      5. Afficher les apprenant(e)s.|");
-            System.out.println("|      6. Returner à l'acceuil.      |");
+            System.out.println("|      5. Afficher les étudiant(e)S. |");
+            System.out.println("|      6. Afficher les apprenant(e)s.|");
+            System.out.println("|      7. Returner à l'acceuil.      |");
             System.out.println("+------------------------------------+");
             System.out.print("          Entrez : ");
             try{
