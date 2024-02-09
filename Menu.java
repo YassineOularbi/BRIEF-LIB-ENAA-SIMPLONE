@@ -1,7 +1,6 @@
 import java.util.Scanner;
 class Menu {
     Library POOLibrary = new Library();
-    Book POOBook = new Book();
     Scanner scanner = new Scanner(System.in);
     void InterfaceMenu () {
         int ChoixPrincipal = 4;
@@ -12,7 +11,7 @@ class Menu {
             System.out.println("+------------------------------------+");
             System.out.println("|      1. Accéder au livres.         |");
             System.out.println("|      2. Accéder au étudiant(e)s.   |");
-            System.out.println("|      3. Effectuer une réservation. |");
+            System.out.println("|      3. Accéder au réservations.   |");
             System.out.println("|      4. Quitter                    |");
             System.out.println("+------------------------------------+");
             System.out.print("          Entrez : ");
@@ -33,6 +32,7 @@ class Menu {
                     InterfaceEtudiant();
                     break;
                 case 3:
+                    InterfaceReservation();
                     break;
                 case 4:
                     System.out.println("+------------------------------------+");
@@ -47,7 +47,7 @@ class Menu {
     }
 
     void InterfaceLivres(){
-        int ChoixLivre = 7;
+        int ChoixLivre = 6;
         do
         {
         System.out.println("+------------------------------------+");
@@ -58,8 +58,7 @@ class Menu {
         System.out.println("|      3. Supprimer un livre.        |");
         System.out.println("|      4. Rechercher un livre.       |");
         System.out.println("|      5. Afficher les livres.       |");
-        System.out.println("|      6. Afficher les Reservations. |");
-        System.out.println("|      7. Returner à l'acceuil.      |");
+        System.out.println("|      6. Returner à l'acceuil.      |");
         System.out.println("+------------------------------------+");
         System.out.print("          Entrez : ");
         try{
@@ -87,19 +86,17 @@ class Menu {
             case 5:
                 POOLibrary.DisplayBooks();
                 break;
-            case 6:
-                break;
-            case 7 :
+            case 6 :
                 InterfaceMenu();
                 break;
             default:
                 System.out.println("|      Entrez un choix valid !       |");
                 break;
         }
-        }while (ChoixLivre != 7);
+        }while (ChoixLivre != 6);
     }
     void InterfaceEtudiant(){
-        int ChoixEtudiant = 7;
+        int ChoixEtudiant = 6;
         do {
             System.out.println("+------------------------------------+");
             System.out.println("|        Interface Etudiant(e)s      |");
@@ -109,8 +106,7 @@ class Menu {
             System.out.println("|      3. Supprimer un étudiant(e).  |");
             System.out.println("|      4. Rechercher un étudiant(e). |");
             System.out.println("|      5. Afficher les étudiant(e)S. |");
-            System.out.println("|      6. Afficher les apprenant(e)s.|");
-            System.out.println("|      7. Returner à l'acceuil.      |");
+            System.out.println("|      6. Returner à l'acceuil.      |");
             System.out.println("+------------------------------------+");
             System.out.print("          Entrez : ");
             try{
@@ -124,6 +120,56 @@ class Menu {
             }
             switch (ChoixEtudiant) {
                 case 1:
+                    POOLibrary.AddStudent();
+                    break;
+                case 2:
+                    POOLibrary.ModifyStudentLib();
+                    break;
+                case 3:
+                    POOLibrary.RemoveStudent();
+                    break;
+                case 4:
+                    POOLibrary.SearchStudent();
+                    break;
+                case 5:
+                    POOLibrary.DisplayStudents();
+                    break;
+                case 6 :
+                    InterfaceMenu();
+                    break;
+                default:
+                    System.out.println("|      Entrez un choix valid !       |");
+                    break;
+            }
+        }while (ChoixEtudiant != 6);
+    }
+    void InterfaceReservation (){
+        int ChoixReservation = 0;
+        do {
+            System.out.println("+------------------------------------+");
+            System.out.println("|      Interface de Réservations     |");
+            System.out.println("+------------------------------------+");
+            System.out.println("|      1. Effectuer une réservation. |");
+            System.out.println("|      2. Modifier une réservation.  |");
+            System.out.println("|      3. Supprimer une réservation. |");
+            System.out.println("|      4. Rechercher une réservation.|");
+            System.out.println("|      5. Afficher les réservations. |");
+            System.out.println("|      5. Alerte de réservation.     |");
+            System.out.println("|      7. Returner à l'acceuil.      |");
+            System.out.println("+------------------------------------+");
+            System.out.print("          Entrez : ");
+            try{
+                String inputTry = scanner.nextLine();
+                ChoixReservation = Integer.parseInt(inputTry);
+            }catch (NumberFormatException e){
+                System.out.println("+------------------------------------+");
+                System.out.println("|             Désolé !!!             |");
+                System.out.println("|   Entrez un nombre entre 1 et 6 !  |");
+                InterfaceReservation();
+            }
+            switch (ChoixReservation) {
+                case 1:
+                    POOLibrary.AddReservation();
                     break;
                 case 2:
                     break;
@@ -132,8 +178,9 @@ class Menu {
                 case 4:
                     break;
                 case 5:
+                    POOLibrary.DisplayReservations();
                     break;
-                case 6:
+                case 6 :
                     break;
                 case 7 :
                     InterfaceMenu();
@@ -142,6 +189,6 @@ class Menu {
                     System.out.println("|      Entrez un choix valid !       |");
                     break;
             }
-        }while (ChoixEtudiant != 7);
+        }while (ChoixReservation != 7);
     }
 }
