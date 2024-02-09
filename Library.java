@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -137,6 +138,7 @@ class Library {
                     System.out.println("-> Auteur :" + ArrayBook.get(i).Author);
                     System.out.println("-> Date de publication :" + ArrayBook.get(i).Publication_Date);
                     System.out.println("-> Numéro ISBN :" + ArrayBook.get(i).ISBN_Number);
+                    System.out.println("-> Apprenant(e) :" + ArrayBook.get(i).Owner);
                     System.out.println("+------------------------------------+");
             }
         }
@@ -270,6 +272,7 @@ class Library {
                 System.out.println("-> Adresse :" + ArrayStudent.get(i).Address);
                 System.out.println("-> Numéro d'identification :" + ArrayStudent.get(i).Identification_Number);
                 System.out.println("-> Classe :" + ArrayStudent.get(i).Classroom);
+                System.out.println("-> Livre reservé :" + ArrayStudent.get(i).Owned_by);
                 System.out.println("+------------------------------------+");
             }
         }
@@ -277,23 +280,60 @@ class Library {
     void AddReservation() {
         Reservation POOReservation = new Reservation();
         LocalDate currenteDate = LocalDate.now();
-        System.out.println("+------------------------------------+");
-        System.out.println("|       Ajouter une réservation      |");
-        System.out.println("+------------------------------------+");
-        System.out.println("Entrez le nom d'étudiant qui reserve : ");
-        POOReservation.Student_Name = scanner.nextLine();
-        System.out.println("Entrez Le titre du livre à reserver : ");
-        POOReservation.Book_Name = scanner.nextLine();
-        POOReservation.Date_Begin = currenteDate;
-        System.out.println("Entrez la date fin de réservation : ");
-        POOReservation.Date_End = scanner.nextLine();
-        ArrayReservation.add(POOReservation);
-        System.out.println("+------------------------------------+");
-        System.out.println("|La réservation effuectée avec succes|");
-        System.out.println("+------------------------------------+");
+        if (ArrayBook.isEmpty()){
+            System.out.println("+------------------------------------+");
+            System.out.println("|      La bibliothèque est vide.     |");
+            System.out.println("| Aucun livre trouvé pour l'instant. |");
+            System.out.println("+------------------------------------+");
+        } else if (ArrayStudent.isEmpty()){
+            System.out.println("+-------------------------------------+");
+            System.out.println("|       La bibliothèque est vide.     |");
+            System.out.println("|Aucun étudiant trouvé pour l'instant.|");
+            System.out.println("+-------------------------------------+");
+        } else {
+            System.out.println("+------------------------------------+");
+            System.out.println("|       Ajouter une réservation      |");
+            System.out.println("+------------------------------------+");
+            System.out.println("Entrez le nom d'étudiant qui reserve : ");
+            String CheckStudentName = scanner.nextLine();
+            for (int i = 0; i < ArrayBook.size(); i++){
+                if (ArrayStudent.get(i).Name.equals(CheckStudentName)){
+                    POOReservation.Student_Name = ArrayStudent.get(i).Name;
+                    System.out.println("Entrez Le titre du livre à reserver : ");
+                    String CheckBookName = scanner.nextLine();
+                    if (ArrayBook.get(i).Title.equals(CheckBookName)){
+                        POOReservation.Book_Name = ArrayBook.get(i).Title;
+                        POOReservation.Date_Begin = currenteDate;
+                        System.out.println("Entrez la date fin de réservation : ");
+                        String FormatterDate = scanner.nextLine();
+                        LocalDate FormatDate = LocalDate.parse(FormatterDate, DateTimeFormatter.ISO_DATE);
+                        POOReservation.Date_End = FormatDate;
+                        Student Owned_by = ArrayBook.get(i).Title;
+                        ArrayBook.get(i).Owner = ArrayStudent.get(i).Name;
+                        ArrayReservation.add(POOReservation);
+                        System.out.println("+------------------------------------+");
+                        System.out.println("|La réservation effuectée avec succes|");
+                        System.out.println("+------------------------------------+");
+                    } else {
+                        System.out.println("+------------------------------------+");
+                        System.out.println("|       Le livre n'existe pas!       |");
+                        System.out.println("+------------------------------------+");
+                    }
+                    } else {
+                    System.out.println("+------------------------------------+");
+                    System.out.println("|      L'étudiant n'existe pas!      |");
+                    System.out.println("+------------------------------------+");
+
+
+
+                }
+
+            }
+        }
+
     }
     void DisplayReservations () {
-        if (ArrayReservation.isEmpty()) {
+        if (ArrayBook.isEmpty()) {
             System.out.println("+-------------------------------------+");
             System.out.println("|       La bibliothèque est vide.     |");
             System.out.println("|  Aucune réservation pour l'instant. |");

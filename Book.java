@@ -5,7 +5,7 @@ class Book {
         String Author;
         String Publication_Date;
         String ISBN_Number;
-        String Learner;
+        String Owner;
         void ModifyBook () {
                 Scanner scanner = new Scanner(System.in);
                                  System.out.println("+------------------------------------+");

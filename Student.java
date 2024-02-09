@@ -1,10 +1,13 @@
 import java.util.Scanner;
 
 class Student {
+        Book book = new Book();
         String Name;
         String Address;
         String Identification_Number;
         String Classroom;
+        book Owned_by;
+
         void ModifyStudent () {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("+------------------------------------+");
