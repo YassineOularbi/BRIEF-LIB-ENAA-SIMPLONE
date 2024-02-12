@@ -7,7 +7,7 @@ class Menu {
         do
         {
             System.out.println("+------------------------------------+");
-            System.out.println("|       Gestion de Bibliothèque      |");
+            System.out.println("|       Gestion de Biblioth èque      |");
             System.out.println("+------------------------------------+");
             System.out.println("|      1. Accéder au livres.         |");
             System.out.println("|      2. Accéder au étudiant(e)s.   |");
@@ -150,12 +150,10 @@ class Menu {
             System.out.println("|      Interface de Réservations     |");
             System.out.println("+------------------------------------+");
             System.out.println("|      1. Effectuer une réservation. |");
-            System.out.println("|      2. Modifier une réservation.  |");
-            System.out.println("|      3. Supprimer une réservation. |");
-            System.out.println("|      4. Rechercher une réservation.|");
-            System.out.println("|      5. Afficher les réservations. |");
-            System.out.println("|      5. Alerte de réservation.     |");
-            System.out.println("|      7. Returner à l'acceuil.      |");
+            System.out.println("|      2. Annuler une réservation. |");
+            System.out.println("|      3. Afficher les réservations. |");
+            System.out.println("|      4. Alerte de réservation.     |");
+            System.out.println("|      5. Returner à l'acceuil.      |");
             System.out.println("+------------------------------------+");
             System.out.print("          Entrez : ");
             try{
@@ -172,23 +170,21 @@ class Menu {
                     POOLibrary.AddReservation();
                     break;
                 case 2:
+                    POOLibrary.ReturnReservation();
                     break;
                 case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
                     POOLibrary.DisplayReservations();
                     break;
-                case 6 :
+                case 4 :
+                    POOLibrary.DisplayWarningReservation();
                     break;
-                case 7 :
+                case 5 :
                     InterfaceMenu();
                     break;
                 default:
                     System.out.println("|      Entrez un choix valid !       |");
                     break;
             }
-        }while (ChoixReservation != 7);
+        }while (ChoixReservation != 5);
     }
 }

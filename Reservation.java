@@ -1,8 +1,9 @@
 import java.time.LocalDate;
 
 class Reservation {
-    String Student_Name;
-    String Book_Name;
+    Student Student_Reservation = new Student();
+    Book Book_Reservation = new Book();
     LocalDate Date_Begin;
     LocalDate Date_End;
+    boolean WarningReservation = false;
 }

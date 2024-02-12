@@ -1,12 +1,13 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Student {
-        Book book = new Book();
+
         String Name;
         String Address;
         String Identification_Number;
         String Classroom;
-        book Owned_by;
+        ArrayList<Book> Owned_by = new ArrayList<Book>();
 
         void ModifyStudent () {
                 Scanner scanner = new Scanner(System.in);
