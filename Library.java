@@ -74,11 +74,13 @@ class Library {
             for (int i = 0; i < ArrayBook.size(); i++) {
                 if (ArrayBook.get(i).Title.equals(RemoveTitle)) {
                     iremove = i;
-                            ArrayBook.get(i).Booked = false;
-                            ArrayBook.get(i).Owner = null;
-                            ArrayStudent.get(i).Owned_by.remove(ArrayBook.get(i));
-                            ArrayReservation.remove(i);
-                            ArrayReservation.get(i).WarningReservation = false;
+                    if(!ArrayStudent.isEmpty() && ArrayBook.get(i).Booked) {
+                        ArrayBook.get(i).Booked = false;
+                        ArrayBook.get(i).Owner = null;
+                        ArrayStudent.get(i).Owned_by.remove(ArrayBook.get(i));
+                        ArrayReservation.remove(i);
+                        ArrayReservation.get(i).WarningReservation = false;
+                    }
                 }
             }
             if (iremove == -1) {
@@ -239,11 +241,13 @@ class Library {
             for (int i = 0; i < ArrayStudent.size(); i++) {
                 if (ArrayStudent.get(i).Name.equals(RemoveName)) {
                     iremove = i;
-                    ArrayBook.get(i).Booked = false;
-                    ArrayBook.get(i).Owner = null;
-                    ArrayStudent.get(i).Owned_by.remove(ArrayBook.get(i));
-                    ArrayReservation.remove(i);
-                    ArrayReservation.get(i).WarningReservation = false;
+                    if(ArrayStudent.get(i).Owned_by == null) {
+                        ArrayBook.get(i).Booked = false;
+                        ArrayBook.get(i).Owner = null;
+                        ArrayStudent.get(i).Owned_by.remove(ArrayBook.get(i));
+                        ArrayReservation.remove(i);
+                        ArrayReservation.get(i).WarningReservation = false;
+                    }
                 }
             }
             if (iremove == -1) {
@@ -445,6 +449,8 @@ class Library {
             }
         }
     void ReturnReservation() {
+        boolean foundReservationBook = false;
+        boolean foundReservation = false;
         if (ArrayReservation.isEmpty()) {
             System.out.println("+-------------------------------------+");
             System.out.println("| Aucune réservation pour l'instant ! |");
@@ -455,35 +461,41 @@ class Library {
             System.out.println("+------------------------------------+");
             System.out.println("Entrez le nom de l'étudiant :");
             String returnStudent = scanner.nextLine();
-            boolean foundReservation = false;
             for (int i = 0; i <ArrayReservation.size(); i++) {
                 if (ArrayReservation.get(i).Student_Reservation.Name.equals(returnStudent)) {
                     foundReservation = true;
                     System.out.println("+------------------------------------+");
                     System.out.println("| Livres réservés par " + returnStudent + " :");
                     System.out.println("+------------------------------------+");
-                    for (Reservation  ReturnReservation : ArrayReservation) {
-                        int r;
-                        System.out.println("- Livre : " + ReturnReservation.Book_Reservation.Title);
+                    for (Reservation reservation : ArrayReservation) {
+                        if (reservation.Student_Reservation.Name.equals(returnStudent)) {
+                            System.out.println("- Livre : " + reservation.Book_Reservation.Title);
+                        }
                     }
                     System.out.println("Entrez le titre du livre à annuler :");
                     String returnBookTitle = scanner.nextLine();
-                    for (Book ReturnBook : ArrayBook) {
-                        if (ReturnBook.Title.equals(returnBookTitle)) {
-                            ReturnBook.Booked = false;
-                            ReturnBook.Owner = null;
-                            for (Student ReturnStudent : ArrayStudent){
-                                if(ReturnStudent.Name.equals(returnStudent)){
-                                    ReturnStudent.Owned_by.remove(ReturnBook);
+                    for (int j = 0; j < ArrayBook.size() ; j++) {
+                        if (ArrayBook.get(j).Title.equals(returnBookTitle)) {
+                            ArrayBook.get(j).Booked = false;
+                            ArrayBook.get(j).Owner = null;
+                            foundReservationBook = true;
+                            ArrayReservation.remove(i);
+                            for (int s = 0; s < ArrayStudent.size() ; s++){
+                                if(ArrayStudent.get(s).Name.equals(returnStudent)){
+                                    ArrayStudent.get(s).Owned_by.remove(s);
                                 }
                             }
-                            ArrayReservation.remove(i);
-                            ArrayReservation.get(i).WarningReservation = false;
                             System.out.println("+------------------------------------+");
                             System.out.println("| L'annulation effuectée avec succes |");
                             System.out.println("+------------------------------------+");
                             break;
                         }
+                    }
+                    if (!foundReservationBook){
+                        System.out.println("+-------------------------------------+");
+                        System.out.println("|    Aucune réservation trouvée !     |");
+                        System.out.println("+-------------------------------------+");
+                        break;
                     }
                 }
             }
@@ -492,6 +504,7 @@ class Library {
                 System.out.println("|    Aucune réservation trouvée !     |");
                 System.out.println("+-------------------------------------+");
             }
+
         }
     }
     void WarningReservation (){
@@ -503,7 +516,7 @@ class Library {
     }
     void DisplayWarningReservation(){
         WarningReservation();
-        boolean WarningFound = false;
+        int iwarning = -1;
         if (ArrayReservation.isEmpty()) {
             System.out.println("+-------------------------------------+");
             System.out.println("| Aucune réservation pour l'instant ! |");
@@ -523,7 +536,13 @@ class Library {
                     System.out.println("\t- Date fin de réservation : " + ArrayReservation.get(i).Date_End);
                     System.out.println("Alert : le livre " + ArrayReservation.get(i).Book_Reservation.Title + " resérvé par " + ArrayReservation.get(i).Student_Reservation.Name + " doit retourner en " + ArrayReservation.get(i).Date_End);
                     System.out.println("+------------------------------------+");
+                    iwarning = i;
                 }
+            }
+            if (iwarning == -1){
+                System.out.println("+------------------------------------+");
+                System.out.println("|    Aucune Alerte de réservation    |");
+                System.out.println("+------------------------------------+");
             }
         }
     }

@@ -7,7 +7,7 @@ class Menu {
         do
         {
             System.out.println("+------------------------------------+");
-            System.out.println("|       Gestion de Biblioth èque      |");
+            System.out.println("|       Gestion de Bibliothèque      |");
             System.out.println("+------------------------------------+");
             System.out.println("|      1. Accéder au livres.         |");
             System.out.println("|      2. Accéder au étudiant(e)s.   |");

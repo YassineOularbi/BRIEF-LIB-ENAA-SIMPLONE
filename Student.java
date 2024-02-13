@@ -7,7 +7,7 @@ class Student {
         String Address;
         String Identification_Number;
         String Classroom;
-        ArrayList<Book> Owned_by = new ArrayList<Book>();
+        ArrayList<Book> Owned_by = new ArrayList<>();
 
         void ModifyStudent () {
                 Scanner scanner = new Scanner(System.in);
